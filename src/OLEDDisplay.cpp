@@ -998,6 +998,11 @@ void OLEDDisplay::setFontTableLookupFunction(FontTableLookupFunction function) {
   this->fontTableLookupFunction = function;
 }
 
+void OLEDDisplay::setInterimCallback(OLEDDisplayInterimCallback interimCallback)
+{
+	this->interimCallback=interimCallback;
+}
+
 
 char DefaultFontTableLookup(const uint8_t ch) {
     // UTF-8 to font table index converter

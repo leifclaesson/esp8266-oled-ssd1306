@@ -41,8 +41,11 @@
 #ifndef OLEDDISPLAY_h
 #define OLEDDISPLAY_h
 
+#include <functional>
+
 #ifdef ARDUINO
 #include <Arduino.h>
+
 #elif __MBED__
 #define pgm_read_byte(addr)   (*(const unsigned char *)(addr))
 
@@ -149,6 +152,9 @@ enum OLEDDISPLAY_GEOMETRY {
   GEOMETRY_128_32,
   GEOMETRY_RAWMODE,
 };
+
+typedef std::function<void(void)> OLEDDisplayInterimCallback;
+
 
 typedef char (*FontTableLookupFunction)(const uint8_t ch);
 char DefaultFontTableLookup(const uint8_t ch);
@@ -333,7 +339,11 @@ class OLEDDisplay : public Stream {
     uint8_t            *buffer_back;
     #endif
 
+    void setInterimCallback(OLEDDisplayInterimCallback interimCallback);
+
   protected:
+
+    OLEDDisplayInterimCallback interimCallback=NULL;
 
     OLEDDISPLAY_GEOMETRY geometry;
 

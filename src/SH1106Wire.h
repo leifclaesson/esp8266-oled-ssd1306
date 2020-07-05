@@ -87,6 +87,7 @@ class SH1106Wire : public OLEDDisplay {
            buffer_back[pos] = buffer[pos];
          }
          yield();
+         if(interimCallback) interimCallback();
         }
 
         // If the minBoundY wasn't updated
@@ -113,6 +114,7 @@ class SH1106Wire : public OLEDDisplay {
             if (k == 16)  {
               Wire.endTransmission();
               k = 0;
+              if(interimCallback) interimCallback();
             }
           }
           if (k != 0)  {
@@ -120,6 +122,7 @@ class SH1106Wire : public OLEDDisplay {
             k = 0;
           }
           yield();
+          if(interimCallback) interimCallback();
         }
 
         if (k != 0) {
@@ -139,6 +142,7 @@ class SH1106Wire : public OLEDDisplay {
             }
             Wire.endTransmission();
           }
+          if(interimCallback) interimCallback();
         }
       #endif
     }
